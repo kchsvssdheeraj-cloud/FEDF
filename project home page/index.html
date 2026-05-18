@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aircraft Maintenance Tracker</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#050816;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    .navbar{
+      width:100%;
+      padding:20px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(12px);
+      background:rgba(0,0,0,0.25);
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:700;
+      color:#4fc3f7;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      transition:0.3s;
+      font-weight:500;
+    }
+
+    .nav-links a:hover{
+      color:#4fc3f7;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:120px 8% 50px;
+      background:
+      radial-gradient(circle at top right,#1e3a8a 0%,transparent 30%),
+      radial-gradient(circle at bottom left,#0284c7 0%,transparent 35%),
+      #050816;
+    }
+
+    .hero-text{
+      max-width:650px;
+      animation:fadeIn 1.5s ease;
+    }
+
+    .hero-text h1{
+      font-size:70px;
+      line-height:1.1;
+      margin-bottom:25px;
+      background:linear-gradient(to right,#ffffff,#4fc3f7);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-text p{
+      font-size:18px;
+      line-height:1.8;
+      color:#d1d5db;
+      margin-bottom:35px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:20px;
+    }
+
+    .btn{
+      padding:14px 30px;
+      border:none;
+      border-radius:50px;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:600;
+      transition:0.3s;
+      text-decoration:none;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,#0284c7,#38bdf8);
+      color:white;
+      box-shadow:0 0 25px rgba(56,189,248,0.5);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-4px);
+    }
+
+    .btn-secondary{
+      border:2px solid #38bdf8;
+      color:#38bdf8;
+      background:transparent;
+    }
+
+    .btn-secondary:hover{
+      background:#38bdf8;
+      color:black;
+    }
+
+    .hero-image{
+      position:relative;
+      animation:float 4s ease-in-out infinite;
+    }
+
+    .hero-image img{
+      width:550px;
+      filter:drop-shadow(0 0 40px rgba(56,189,248,0.4));
+    }
+
+    .features{
+      padding:100px 8%;
+      background:#0b1120;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:45px;
+      margin-bottom:70px;
+      color:#4fc3f7;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .feature-card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      padding:35px;
+      border-radius:25px;
+      transition:0.4s;
+      backdrop-filter:blur(15px);
+    }
+
+    .feature-card:hover{
+      transform:translateY(-10px) scale(1.02);
+      border-color:#38bdf8;
+      box-shadow:0 0 25px rgba(56,189,248,0.25);
+    }
+
+    .feature-card h3{
+      font-size:24px;
+      margin-bottom:15px;
+      color:#38bdf8;
+    }
+
+    .feature-card p{
+      line-height:1.8;
+      color:#d1d5db;
+    }
+
+    .stats{
+      padding:80px 8%;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:25px;
+      background:#050816;
+    }
+
+    .stat-box{
+      text-align:center;
+      padding:40px;
+      border-radius:25px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-box h2{
+      font-size:50px;
+      color:#38bdf8;
+      margin-bottom:10px;
+    }
+
+    .stat-box p{
+      color:#d1d5db;
+      font-size:18px;
+    }
+
+    footer{
+      text-align:center;
+      padding:40px 20px;
+      background:#020617;
+      color:#94a3b8;
+      border-top:1px solid rgba(255,255,255,0.08);
+    }
+
+    @keyframes float{
+      0%{transform:translateY(0px);} 
+      50%{transform:translateY(-20px);} 
+      100%{transform:translateY(0px);} 
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0px);
+      }
+    }
+
+    @media(max-width:1000px){
+      .hero{
+        flex-direction:column;
+        text-align:center;
+        gap:50px;
+      }
+
+      .hero-text h1{
+        font-size:52px;
+      }
+
+      .hero-buttons{
+        justify-content:center;
+      }
+
+      .hero-image img{
+        width:100%;
+        max-width:450px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">✈ AeroTrack</div>
+
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Dashboard</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+
+    <div class="hero-text">
+      <h1>Aircraft Maintenance Tracker</h1>
+
+      <p>
+        Revolutionizing aviation maintenance with smart scheduling,
+        real-time aircraft monitoring, digital inspection logs,
+        and intelligent maintenance tracking systems designed
+        for modern aerospace operations.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">Explore System</a>
+        <a href="#" class="btn btn-secondary">Watch Demo</a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop" alt="Aircraft">
+    </div>
+
+  </section>
+
+  <section class="features">
+
+    <h2 class="section-title">Core Features</h2>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <h3>Aircraft Monitoring</h3>
+        <p>
+          Track aircraft status, inspections, engine health,
+          and maintenance schedules in real-time.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Maintenance Scheduling</h3>
+        <p>
+          Automatically manage servicing timelines,
+          maintenance reminders, and overdue inspections.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Digital Service Logs</h3>
+        <p>
+          Maintain complete aircraft service history
+          with secure digital documentation.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Admin Dashboard</h3>
+        <p>
+          Manage aircraft records, technicians,
+          maintenance reports, and operational analytics.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Smart Notifications</h3>
+        <p>
+          Receive instant alerts for upcoming maintenance,
+          component replacements, and inspection deadlines.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>Secure Database</h3>
+        <p>
+          Store maintenance records securely using
+          cloud-integrated database management systems.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="stats">
+
+    <div class="stat-box">
+      <h2>24/7</h2>
+      <p>Aircraft Monitoring</p>
+    </div>
+
+    <div class="stat-box">
+      <h2>100%</h2>
+      <p>Digital Records</p>
+    </div>
+
+    <div class="stat-box">
+      <h2>50+</h2>
+      <p>Maintenance Reports</p>
+    </div>
+
+    <div class="stat-box">
+      <h2>Real-Time</h2>
+      <p>Alerts & Tracking</p>
+    </div>
+
+  </section>
+
+  <footer>
+    <h3>Aircraft Maintenance Tracker</h3>
+    <br>
+    <p>
+      Designed for efficient aviation maintenance management,
+      enhanced safety compliance, and smart aircraft servicing operations.
+    </p>
+  </footer>
+
+</body>
+</html>
